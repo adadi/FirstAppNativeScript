@@ -5,10 +5,10 @@
         <TabViewItem.view>
           <ListView items="{{ contacts }}" row="1">
             <ListView.itemTemplate>
-              <GridLayout columns="100,*, auto" rows="100">
-                <Image style="background-color: green;" src="{{ image }}" col="0" />
+              <GridLayout columns="100,*, auto">
+                <Image src="{{ picture.thumbnail }}" col="0" />
                 <DockLayout stretchLastChild="true" col="1" >
-                  <Label text="{{ name }}" style="border-radius:25px; background-color: green; "/>
+                  <Label text="{{ name.first }}"/>
                 </DockLayout>
               </GridLayout>
             </ListView.itemTemplate>

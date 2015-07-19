@@ -10,6 +10,8 @@ var posts = new observableArray.ObservableArray([]);
 var pageData = new observableModule.Observable();
 var page;
 var list;
+var http = require("http");
+
 exports.onPageLoaded = function(args) {
   page = args.object;
 
@@ -43,9 +45,22 @@ exports.onPageLoaded = function(args) {
 
   });
   page.bindingContext = pageData;
-  for(var i=0;i<20;i++){
-    contacts.push({ name: "name "+i,image:"~/profile.png"});
-  }
+
+  console.log("name *****************************************");
+  http.getJSON("http://api.randomuser.me/?results=10").then(function (r) {
+    // Argument (r) is JSON!
+    console.log(r.results.length);
+    for(var i=0;i<r.results.length;i++){
+      console.log(r.results[i].user.name.first);
+      console.log(r.results[i].user.picture.thumbnail);
+      contacts.push(r.results[i].user);
+    }
+  }, function (e) {
+    // Argument (e) is Error!
+    console.log("error *****************************************");
+    console.log(e);
+  });
+
   for(var i=0;i<20;i++)
   evenements.push({ name: "evenement :"+i });
   for(var i=0;i<20;i++)
